@@ -1,199 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content=""> 
-  <meta property="og:title" content="FemboyFriday.gay"> 
-  <meta property="og:image" content="https://riley.cat/assets/femboyfriday.jpg">
-  <meta property="og:description" content="Countdown to FemboyFriday!">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Is it Femboy Friday?</title>
-  <link rel="icon" href="https://riley.cat/femboyfriday.jpg" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>femboyfriday.gay</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
     body {
       margin: 0;
-      height: 100vh;
+      background-color: #0a0a0a;
+      color: #fff;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1f1b2d 0%, #12101a 100%);
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      color: #c8c1e0;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
-      padding: 20px;
-      opacity: 0;
-      animation: fadeIn 1.2s ease-out forwards;
+      overflow: hidden;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    h1 {
-      font-weight: 600;
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: #b8aee6;
-      text-shadow: 0 0 10px #8e84c7aa;
-    }
-
-    #message {
-      background: #272339;
-      border-radius: 15px;
-      padding: 30px 50px;
-      max-width: 400px;
-      font-size: 1.7rem;
-      font-weight: 500;
-      box-shadow: 0 8px 30px rgb(89 64 153 / 0.5);
-      color: #c2baf2;
-      user-select: none;
+    .container {
+      border: 2px solid rgba(85, 205, 252, 0.4);
+      border-radius: 20px;
+      padding: 40px 50px;
+      box-shadow: 0 0 25px rgba(247, 168, 184, 0.3);
+      background: linear-gradient(180deg, rgba(10, 10, 10, 1) 0%, rgba(15, 15, 15, 1) 100%);
+      max-width: 500px;
+      width: 90%;
       position: relative;
-      margin-bottom: 25px;
+      z-index: 2;
     }
 
-    #countdown {
-      font-size: 1.1rem;
-      margin-top: -15px;
-      margin-bottom: 25px;
-      color: #a29bdb;
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50px;
+      padding: 10px 20px;
+      box-shadow: 0 0 15px rgba(85, 205, 252, 0.3);
     }
 
-    #profile-pic {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 64px;
-      height: 64px;
+    .navbar a {
+      color: #55CDFC;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #F7A8B8;
+    }
+
+    .navbar img {
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
+      border: 2px solid #F7A8B8;
+      box-shadow: 0 0 10px rgba(247, 168, 184, 0.5);
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 10px rgba(149, 132, 224, 0.3);
-      z-index: 1000;
+      transition: 0.3s;
     }
 
-    #profile-pic:hover {
+    .navbar img:hover {
       transform: scale(1.1);
     }
 
-    .rainbow-glow {
-      animation: rainbowGlow 6s linear infinite, spinSlow 20s linear infinite;
+    .countdown-box {
+      margin-top: 25px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 25px 30px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(85, 205, 252, 0.4);
+      border: 1px solid rgba(85, 205, 252, 0.2);
     }
 
-    @keyframes rainbowGlow {
-      0% { box-shadow: 0 0 12px #e40303; }
-      16% { box-shadow: 0 0 12px #ff8c00; }
-      33% { box-shadow: 0 0 12px #ffed00; }
-      50% { box-shadow: 0 0 12px #008026; }
-      66% { box-shadow: 0 0 12px #004dff; }
-      83% { box-shadow: 0 0 12px #750787; }
-      100% { box-shadow: 0 0 12px #e40303; }
+    .countdown-title {
+      font-weight: 600;
+      color: #55CDFC;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
     }
 
-    @keyframes spinSlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .countdown {
+      font-size: 1.6rem;
+      color: #F7A8B8;
+      text-shadow: 0 0 8px #F7A8B8;
+    }
+
+    footer {
+      margin-top: 35px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
-  <h1>Is it Femboy Friday?</h1>
-  <div id="message">Checking...</div>
-  <div id="countdown"></div>
 
-  <img
-    id="profile-pic"
-    src="https://riley.cat/assets/pfp.gif"
-    alt="Profile"
-  />
+  <canvas id="confetti"></canvas>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <div class="container">
+    <div class="navbar">
+      <a href="#">femboyfriday.gay</a>
+      <a href="https://riley.cat" target="_blank">
+        <img src="https://riley.cat/pfp.png" alt="riley profile">
+      </a>
+    </div>
 
+    <div class="countdown-box">
+      <div class="countdown-title">⏰ Countdown to Femboy Friday</div>
+      <div class="countdown" id="countdown">Loading...</div>
+    </div>
+
+    <footer>© 2025 riley.cat</footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script>
-    const messageEl = document.getElementById('message');
-    const countdownEl = document.getElementById('countdown');
-    const profilePic = document.getElementById('profile-pic');
-
-    function isFemboyFriday() {
+    function updateCountdown() {
       const now = new Date();
-      return now.getDay() === 5; // Friday (0 = Sunday, 5 = Friday)
+      const nextFriday = new Date();
+      nextFriday.setDate(now.getDate() + ((5 - now.getDay() + 7) % 7));
+      nextFriday.setHours(0, 0, 0, 0);
+
+      const diff = nextFriday - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('countdown').textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
-    function getTimeUntilNextFriday() {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    function checkFriday() {
       const now = new Date();
-      const day = now.getDay(); // 0 = Sunday
+      if (now.getDay() === 5) {
+        const duration = 10 * 1000;
+        const end = Date.now() + duration;
 
-      let daysUntilFriday = (5 - day + 7) % 7;
-
-      // If it's already Friday, next Friday is 7 days from now
-      if (day === 5) {
-        daysUntilFriday = 7;
+        (function frame() {
+          confetti({
+            particleCount: 5,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#55CDFC', '#F7A8B8', '#FFFFFF']
+          });
+          confetti({
+            particleCount: 5,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#55CDFC', '#F7A8B8', '#FFFFFF']
+          });
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        })();
       }
-
-      const nextFriday = new Date(now);
-      nextFriday.setDate(now.getDate() + daysUntilFriday);
-      nextFriday.setHours(0, 0, 0, 0); // Set to next Friday at 00:00
-
-      return nextFriday - now;
     }
 
-    function formatTime(ms) {
-      const totalSeconds = Math.floor(ms / 1000);
-      const days = Math.floor(totalSeconds / (3600 * 24));
-      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-      return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    function showFemboyFridayMessage() {
-      messageEl.textContent = "Yes! It's Femboy Friday 🎉";
-      countdownEl.textContent = "";
-      profilePic.classList.add('rainbow-glow');
-
-      const prideColors = ['#e40303', '#ff8c00', '#ffed00', '#008026', '#004dff', '#750787'];
-
-      function fireSideConfetti() {
-        confetti({ particleCount: 250, angle: 90, spread: 70, origin: { x: 0.5, y: 0 }, colors: prideColors });
-        confetti({ particleCount: 250, angle: 270, spread: 70, origin: { x: 0.5, y: 1 }, colors: prideColors });
-        confetti({ particleCount: 250, angle: 0, spread: 70, origin: { x: 0, y: 0.5 }, colors: prideColors });
-        confetti({ particleCount: 250, angle: 180, spread: 70, origin: { x: 1, y: 0.5 }, colors: prideColors });
-      }
-
-      fireSideConfetti();
-      const interval = setInterval(fireSideConfetti, 3000);
-      setTimeout(() => clearInterval(interval), 15000);
-    }
-
-    function startCountdown() {
-      function updateCountdown() {
-        const ms = getTimeUntilNextFriday();
-        if (ms <= 0) {
-          showFemboyFridayMessage();
-          clearInterval(timer);
-        } else {
-          countdownEl.textContent = `Time until next Femboy Friday: ${formatTime(ms)}`;
-        }
-      }
-
-      updateCountdown();
-      const timer = setInterval(updateCountdown, 1000);
-    }
-
-    profilePic.addEventListener('click', () => {
-      window.location.href = 'https://riley.cat';
-    });
-
-    if (isFemboyFriday()) {
-      showFemboyFridayMessage();
-    } else {
-      messageEl.textContent = "Nope, it's not Femboy Friday yet.";
-      startCountdown();
-    }
+    checkFriday();
   </script>
+
 </body>
 </html>
